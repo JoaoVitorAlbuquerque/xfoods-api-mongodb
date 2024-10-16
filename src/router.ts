@@ -12,6 +12,7 @@ import { createProduct } from './app/useCases/products/createProduct';
 import { listProductsByCategory } from './app/useCases/categories/listProductsByCategory';
 import { updateCategory } from './app/useCases/categories/updateCategory';
 import { removeCategory } from './app/useCases/categories/removeCategory';
+import { removeIngredient } from './app/useCases/ingredients/removeIngredient';
 
 export const router = Router();
 
@@ -50,9 +51,7 @@ router.post('/ingredients', createIngredient);
 router.put('/ingredients/:ingredientId', updateIngredient);
 
 // Delete ingredient /* Talvez inserir o método PATCH */
-router.delete('/ingredients/:ingredientId', (req, res) => {
-  res.send('Ok');
-});
+router.delete('/ingredients/:ingredientId', removeIngredient);
 
 // ##
 
