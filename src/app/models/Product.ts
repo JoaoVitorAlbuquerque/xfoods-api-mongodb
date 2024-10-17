@@ -27,9 +27,9 @@ export const Product = model('Product', new Schema({
     required: true,
     ref: 'Category',
   },
-  ingredient: {
+  ingredients: [{
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'Ingredient',
-  },
+  }],
 }));

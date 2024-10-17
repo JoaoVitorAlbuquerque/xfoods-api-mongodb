@@ -4,15 +4,20 @@ import multer from 'multer';
 
 import { listCategories } from './app/useCases/categories/listCategories';
 import { createCategory } from './app/useCases/categories/createCategory';
-import { listProducts } from './app/useCases/products/listProducts';
+import { updateCategory } from './app/useCases/categories/updateCategory';
+import { removeCategory } from './app/useCases/categories/removeCategory';
+
 import { listIngredients } from './app/useCases/ingredients/listIngredients';
 import { createIngredient } from './app/useCases/ingredients/createIngredient';
 import { updateIngredient } from './app/useCases/ingredients/updateIngredient';
-import { createProduct } from './app/useCases/products/createProduct';
-import { listProductsByCategory } from './app/useCases/categories/listProductsByCategory';
-import { updateCategory } from './app/useCases/categories/updateCategory';
-import { removeCategory } from './app/useCases/categories/removeCategory';
 import { removeIngredient } from './app/useCases/ingredients/removeIngredient';
+
+import { listProducts } from './app/useCases/products/listProducts';
+import { createProduct } from './app/useCases/products/createProduct';
+import { updateProduct } from './app/useCases/products/updateProduct';
+import { removeProduct } from './app/useCases/products/removeProduct';
+import { softDeleteProduct } from './app/useCases/products/softDeleteProduct';
+import { listProductsByCategory } from './app/useCases/categories/listProductsByCategory';
 
 export const router = Router();
 
@@ -65,14 +70,13 @@ router.get('/categories/:categoryId/products', listProductsByCategory);
 router.post('/products', upload.single('image'), createProduct);
 
 // Update Product
-router.put('/products/:productId', (req, res) => {
-  res.send('Ok');
-});
+router.put('/products/:productId', updateProduct);
 
 // Delete Product
-router.delete('/products/:productId', (req, res) => {
-  res.send('Ok');
-});
+router.delete('/products/:productId', removeProduct);
+
+// Soft delete
+router.patch('/products/:productId/soft-delete', softDeleteProduct);
 
 // ##
 
