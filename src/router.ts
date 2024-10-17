@@ -1,6 +1,6 @@
 import path from 'node:path';
-import { Router } from 'express';
 import multer from 'multer';
+import { Router } from 'express';
 
 import { listCategories } from './app/useCases/categories/listCategories';
 import { createCategory } from './app/useCases/categories/createCategory';
@@ -18,6 +18,14 @@ import { updateProduct } from './app/useCases/products/updateProduct';
 import { removeProduct } from './app/useCases/products/removeProduct';
 import { softDeleteProduct } from './app/useCases/products/softDeleteProduct';
 import { listProductsByCategory } from './app/useCases/categories/listProductsByCategory';
+
+import { createOrder } from './app/useCases/orders/createOrder';
+import { cancelOrder } from './app/useCases/orders/cancelOrder';
+import { changeOrderRead } from './app/useCases/orders/changeOrderRead';
+import { changeOrderStatus } from './app/useCases/orders/changeOrderStatus';
+import { listOrdersHistory } from './app/useCases/orders/listOrdersHistory';
+import { listOrdersDashboard } from './app/useCases/orders/listOrdersDashboard';
+import { changeOrderRestarted } from './app/useCases/orders/changeOrderRestarted';
 
 export const router = Router();
 
@@ -80,32 +88,23 @@ router.patch('/products/:productId/soft-delete', softDeleteProduct);
 
 // ##
 
-// List orders
-router.get('/orders', (req, res) => {
-  res.send('Ok');
-});
+// List orders dashboard
+router.get('/orders/dashboard', listOrdersDashboard);
+
+// List orders history
+router.get('/orders/history', listOrdersHistory);
 
 // Create order
-router.post('/orders', (req, res) => {
-  res.send('Ok');
-});
+router.post('/orders', createOrder);
 
 // Change order status
-router.patch('/orders/:orderId', (req, res) => {
-  res.send('Ok');
-});
+router.patch('/orders/:orderId/order-status', changeOrderStatus);
 
 // Delete order
-router.delete('/orders/:orderId', (req, res) => {
-  res.send('Ok');
-});
+router.delete('/orders/:orderId', cancelOrder);
 
 // Restarted order
-router.patch('/orders/:orderId', (req, res) => {
-  res.send('Ok');
-});
+router.patch('/orders/restarted', changeOrderRestarted);
 
 // Read order
-router.patch('/orders/:orderId', (req, res) => {
-  res.send('Ok');
-});
+router.patch('/orders/:orderId/read', changeOrderRead);
